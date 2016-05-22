@@ -1,4 +1,4 @@
-﻿//This jump set up is for the bounce jump
+//This jump set up is for the bounce jump
 
 //Need to have jump set up for just normal jumping that also allows the player to control flight in air, at a lower horizontal force
 
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 	{
 		horizontalInput = Input.GetAxis("Horizontal");
 
+
 		//Handles all Sprite flipping
 		if (horizontalInput != 0) 
 		{
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
 			{
 				animator.SetInteger("Movement", 0);
 			}
-			//Sprite Aniation Jump
+			//Sprite Animation Jump
 			if (Input.GetButtonDown("Jump"))
 			{
 				animator.SetTrigger("Jump");
@@ -77,22 +78,37 @@ public class PlayerController : MonoBehaviour
 		grounded = Physics2D.Linecast(transform.position, groundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
 		Debug.Log("Grounded: " + grounded);
 
+		DebugPanel.Log("Horizontal Input: ", horizontalInput);
+
 		if (!grounded)
 		{
 			ApplyExtraGravity();
 		}
 		else
 		{
-			//Only Running
+			//Running
 			if (horizontalInput != 0 && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 			{
 				moveVector = new Vector2(horizontalInput, characterRigidbody.velocity.y);
 				moveVector.Normalize();
 				characterRigidbody.velocity = new Vector2(moveVector.x * accelerationSpeed, moveVector.y);
+
+				if (Input.GetButtonDown("Jump"))
+				{
+					if (animator.GetLayerWeight(0) == 1)
+					{
+						characterRigidbody.AddForce(new Vector2(jumpDistance, jumpHeight), ForceMode2D.Impulse);
+					}
+					//Facing Left
+					else
+					{
+						characterRigidbody.AddForce(new Vector2(-jumpDistance, jumpHeight), ForceMode2D.Impulse);
+					}
+				}
 			}
 			//Run Jump
-			else if (horizontalInput != 0 && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
-			{
+			//else if (Input.GetButtonDown("Jump") && horizontalInput != 0/*&& animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump")*/)
+			/*{
 				Debug.Log("Run Jump");
 				//Facing Right
 				if (animator.GetLayerWeight(0) == 1)
@@ -104,14 +120,14 @@ public class PlayerController : MonoBehaviour
 				{
 					characterRigidbody.AddForce(new Vector2(-jumpDistance, jumpHeight), ForceMode2D.Impulse);
 				}
-			}
+			}*/
 			//Standing Still
 			else
 			{
 				characterRigidbody.velocity = Vector2.zero;
 
 
-				if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+				if (Input.GetButtonDown("Jump")/* && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump")*/)
 				{
 					Debug.Log("Stationary Jump");
 					characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
