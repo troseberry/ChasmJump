@@ -59,15 +59,15 @@ public class PlayerController : MonoBehaviour
 				animator.SetInteger("Movement", 1);
 			}
 			//Sprite Animation Idle
-			else
+			else 
 			{
 				animator.SetInteger("Movement", 0);
 			}
 			//Sprite Animation Jump
-			if (Input.GetButtonDown("Jump"))
+			/*if (Input.GetButtonDown("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 			{
 				animator.SetTrigger("Jump");
-			}
+			}*/
 		}
 		
 	}
@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
 		Debug.Log("Grounded: " + grounded);
 
 		DebugPanel.Log("Horizontal Input: ", horizontalInput);
+		DebugPanel.Log("Is Jumping? ", animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"));
 
 		if (!grounded)
 		{
@@ -95,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
 				if (Input.GetButtonDown("Jump"))
 				{
+					Debug.Log("Run Jump");
+					animator.SetTrigger("Jump");
 					if (animator.GetLayerWeight(0) == 1)
 					{
 						characterRigidbody.AddForce(new Vector2(jumpDistance, jumpHeight), ForceMode2D.Impulse);
@@ -127,9 +130,10 @@ public class PlayerController : MonoBehaviour
 				characterRigidbody.velocity = Vector2.zero;
 
 
-				if (Input.GetButtonDown("Jump")/* && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump")*/)
+				if (Input.GetButtonDown("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 				{
 					Debug.Log("Stationary Jump");
+					animator.SetTrigger("Jump");
 					characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
 				}
 			}
