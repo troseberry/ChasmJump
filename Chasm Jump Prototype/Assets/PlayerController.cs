@@ -1,9 +1,3 @@
-//This jump set up is for the bounce jump
-
-//Need to have jump set up for just normal jumping that also allows the player to control flight in air, at a lower horizontal force
-
-
-
 using UnityEngine;
 using System.Collections;
 
@@ -63,18 +57,13 @@ public class PlayerController : MonoBehaviour
 			{
 				animator.SetInteger("Movement", 0);
 			}
-			//Sprite Animation Jump
-			/*if (Input.GetButtonDown("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
-			{
-				animator.SetTrigger("Jump");
-			}*/
+			//Sprite Animation Jump handled in FixedUpdate
 		}
 		
 	}
 
 	void FixedUpdate ()
 	{
-
 		grounded = Physics2D.Linecast(transform.position, groundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
 		Debug.Log("Grounded: " + grounded);
 
@@ -87,7 +76,7 @@ public class PlayerController : MonoBehaviour
 		}
 		else
 		{
-			//Running
+			//Running	
 			if (horizontalInput != 0 && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 			{
 				moveVector = new Vector2(horizontalInput, characterRigidbody.velocity.y);
@@ -98,6 +87,7 @@ public class PlayerController : MonoBehaviour
 				{
 					Debug.Log("Run Jump");
 					animator.SetTrigger("Jump");
+					//Facing Right
 					if (animator.GetLayerWeight(0) == 1)
 					{
 						characterRigidbody.AddForce(new Vector2(jumpDistance, jumpHeight), ForceMode2D.Impulse);
@@ -109,10 +99,10 @@ public class PlayerController : MonoBehaviour
 					}
 				}
 			}
-			//Run Jump
-			//else if (Input.GetButtonDown("Jump") && horizontalInput != 0/*&& animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump")*/)
-			/*{
-				Debug.Log("Run Jump");
+			//Bounce Jump
+			else if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+			{
+				Debug.Log("Bounce Jump");
 				//Facing Right
 				if (animator.GetLayerWeight(0) == 1)
 				{
@@ -123,13 +113,12 @@ public class PlayerController : MonoBehaviour
 				{
 					characterRigidbody.AddForce(new Vector2(-jumpDistance, jumpHeight), ForceMode2D.Impulse);
 				}
-			}*/
-			//Standing Still
+			}
+			//Stationary
 			else
 			{
 				characterRigidbody.velocity = Vector2.zero;
-
-
+				
 				if (Input.GetButtonDown("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 				{
 					Debug.Log("Stationary Jump");
