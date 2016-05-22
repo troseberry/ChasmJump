@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿//This jump set up is for the bounce jump
+
+//Need to have jump set up for just normal jumping that also allows the player to control flight in air, at a lower horizontal force
+
+
+
+using UnityEngine;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour 
@@ -11,8 +17,6 @@ public class PlayerController : MonoBehaviour
 	private Vector2 jumpVector;
 
 	private float horizontalInput;
-	private string direction;
-	private int movementValue;
 
 	public float accelerationSpeed;
 	public float jumpHeight;
@@ -24,8 +28,6 @@ public class PlayerController : MonoBehaviour
 	{
 		animator = GetComponent<Animator>();
 		characterRigidbody = GetComponent<Rigidbody2D>();
-		direction = "right";
-		movementValue = 1;
 		grounded = true;
 	}
 	
@@ -33,31 +35,37 @@ public class PlayerController : MonoBehaviour
 	{
 		horizontalInput = Input.GetAxis("Horizontal");
 
-		if (grounded)
+		//Handles all Sprite flipping
+		if (horizontalInput != 0) 
 		{
-			if (horizontalInput != 0)
+			if(horizontalInput > 0) 
 			{
-				direction = (horizontalInput > 0) ? "right" : "left";
-
-				movementValue = (horizontalInput > 0) ? Mathf.CeilToInt(horizontalInput) : Mathf.FloorToInt(horizontalInput);
-				animator.SetInteger("Movement", 2 * movementValue);
+				animator.SetLayerWeight(0, 1);
+				animator.SetLayerWeight(1, 0);
 			}
 			else
 			{
-				movementValue = (direction == "right") ? 1 : -1;
-				animator.SetInteger("Movement", movementValue);
+				animator.SetLayerWeight(0, 0);
+				animator.SetLayerWeight(1, 1);
 			}
+		}
 
+		if (grounded)
+		{
+			//Sprite Animation Running
+			if (horizontalInput != 0)
+			{
+				animator.SetInteger("Movement", 1);
+			}
+			//Sprite Animation Idle
+			else
+			{
+				animator.SetInteger("Movement", 0);
+			}
+			//Sprite Aniation Jump
 			if (Input.GetButtonDown("Jump"))
 			{
-				if (direction == "right")
-				{
-					animator.SetTrigger("JumpRight");
-				}
-				else
-				{
-					animator.SetTrigger("JumpLeft");
-				}
+				animator.SetTrigger("Jump");
 			}
 		}
 		
@@ -86,10 +94,12 @@ public class PlayerController : MonoBehaviour
 			else if (horizontalInput != 0 && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 			{
 				Debug.Log("Run Jump");
-				if (direction == "right")
+				//Facing Right
+				if (animator.GetLayerWeight(0) == 1)
 				{
 					characterRigidbody.AddForce(new Vector2(jumpDistance, jumpHeight), ForceMode2D.Impulse);
 				}
+				//Facing Left
 				else
 				{
 					characterRigidbody.AddForce(new Vector2(-jumpDistance, jumpHeight), ForceMode2D.Impulse);
@@ -104,52 +114,10 @@ public class PlayerController : MonoBehaviour
 				if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 				{
 					Debug.Log("Stationary Jump");
-					if (direction == "right")
-					{
-						characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-					}
-					else
-					{
-						characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-					}
+					characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
 				}
 			}
-
-
-
-			/*if (Input.GetButtonDown("Jump"))
-			{
-				//Invoke("ApplyJump", 1.0f);
-
-				//characterRigidbody.velocity = Vector2.zero;
-				if (direction == "right")
-				{
-					//characterRigidbody.velocity = new Vector2(jumpDistance, jumpHeight);
-					characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-				}
-				else
-				{
-					//characterRigidbody.velocity = new Vector2(-jumpDistance, jumpHeight);
-					characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-				}
-				//ApplyExtraGravity();
-			}*/
 		}
-	}
-
-	void ApplyJump ()
-	{
-		characterRigidbody.velocity = Vector2.zero;
-		if (direction == "right")
-		{
-			characterRigidbody.velocity = new Vector2(jumpDistance, jumpHeight);
-		}
-		else
-		{
-			characterRigidbody.velocity = new Vector2(-jumpDistance, jumpHeight);
-		}
-
-		//characterRigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
 	}
 
 	void ApplyExtraGravity ()
