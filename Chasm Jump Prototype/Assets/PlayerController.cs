@@ -1,10 +1,4 @@
-﻿//This jump set up is for the bounce jump
-
-//Need to have jump set up for just normal jumping that also allows the player to control flight in air, at a lower horizontal force
-
-
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour 
@@ -35,6 +29,7 @@ public class PlayerController : MonoBehaviour
 	{
 		horizontalInput = Input.GetAxis("Horizontal");
 
+
 		//Handles all Sprite flipping
 		if (horizontalInput != 0) 
 		{
@@ -58,24 +53,22 @@ public class PlayerController : MonoBehaviour
 				animator.SetInteger("Movement", 1);
 			}
 			//Sprite Animation Idle
-			else
+			else 
 			{
 				animator.SetInteger("Movement", 0);
 			}
-			//Sprite Aniation Jump
-			if (Input.GetButtonDown("Jump"))
-			{
-				animator.SetTrigger("Jump");
-			}
+			//Sprite Animation Jump handled in FixedUpdate
 		}
 		
 	}
 
 	void FixedUpdate ()
 	{
-
 		grounded = Physics2D.Linecast(transform.position, groundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
 		Debug.Log("Grounded: " + grounded);
+
+		DebugPanel.Log("Horizontal Input: ", horizontalInput);
+		DebugPanel.Log("Is Jumping? ", animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"));
 
 		if (!grounded)
 		{
@@ -83,17 +76,33 @@ public class PlayerController : MonoBehaviour
 		}
 		else
 		{
-			//Only Running
+			//Running	
 			if (horizontalInput != 0 && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 			{
 				moveVector = new Vector2(horizontalInput, characterRigidbody.velocity.y);
 				moveVector.Normalize();
 				characterRigidbody.velocity = new Vector2(moveVector.x * accelerationSpeed, moveVector.y);
+
+				if (Input.GetButtonDown("Jump"))
+				{
+					Debug.Log("Run Jump");
+					animator.SetTrigger("Jump");
+					//Facing Right
+					if (animator.GetLayerWeight(0) == 1)
+					{
+						characterRigidbody.AddForce(new Vector2(jumpDistance, jumpHeight), ForceMode2D.Impulse);
+					}
+					//Facing Left
+					else
+					{
+						characterRigidbody.AddForce(new Vector2(-jumpDistance, jumpHeight), ForceMode2D.Impulse);
+					}
+				}
 			}
-			//Run Jump
-			else if (horizontalInput != 0 && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+			//Bounce Jump
+			else if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 			{
-				Debug.Log("Run Jump");
+				Debug.Log("Bounce Jump");
 				//Facing Right
 				if (animator.GetLayerWeight(0) == 1)
 				{
@@ -105,15 +114,15 @@ public class PlayerController : MonoBehaviour
 					characterRigidbody.AddForce(new Vector2(-jumpDistance, jumpHeight), ForceMode2D.Impulse);
 				}
 			}
-			//Standing Still
+			//Stationary
 			else
 			{
 				characterRigidbody.velocity = Vector2.zero;
-
-
-				if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+				
+				if (Input.GetButtonDown("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
 				{
 					Debug.Log("Stationary Jump");
+					animator.SetTrigger("Jump");
 					characterRigidbody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
 				}
 			}
