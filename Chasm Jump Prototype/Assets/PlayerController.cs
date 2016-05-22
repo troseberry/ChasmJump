@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour 
@@ -15,8 +15,15 @@ public class PlayerController : MonoBehaviour
 	public float accelerationSpeed;
 	public float jumpHeight;
 	public float jumpDistance;
-	public Transform groundCheck;
+
+	public Transform leftGroundCheck;
+	public Transform centerGroundCheck;
+	public Transform rightGroundCheck;
+
 	private bool grounded;
+	private bool leftGrounded;
+	private bool centerGrounded;
+	private bool rightGrounded;
 
 	void Start ()
 	{
@@ -64,7 +71,11 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		grounded = Physics2D.Linecast(transform.position, groundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+		leftGrounded = Physics2D.Linecast(transform.position, leftGroundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+		centerGrounded = Physics2D.Linecast(transform.position, centerGroundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+		rightGrounded = Physics2D.Linecast(transform.position, rightGroundCheck.transform.position, 1 << LayerMask.NameToLayer("Ground"));
+		grounded = (leftGrounded || centerGrounded || rightGrounded);
+
 		Debug.Log("Grounded: " + grounded);
 
 		DebugPanel.Log("Horizontal Input: ", horizontalInput);
