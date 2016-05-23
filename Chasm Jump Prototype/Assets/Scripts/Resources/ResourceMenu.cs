@@ -35,10 +35,32 @@ public class ResourceMenu : MonoBehaviour
 
 	public void UseTool ()
 	{
-		Debug.Log("Current Resource: " + resourceName);
+		Debug.Log("Current Item Source: " + resourceName);
+		//add the above source to the currentlyCrafting list
+		Inventory.currentlyCrafting.Add(resourceName);
+
 		Debug.Log("Current Tool: " + uiEventSystem.currentSelectedGameObject.name);
-		GatherResource.GainResource(resourceName, uiEventSystem.currentSelectedGameObject.name);
+		//add the above current tool to the currentlyCrafting list
+		Inventory.currentlyCrafting.Add(uiEventSystem.currentSelectedGameObject.name);
+		//hide tools ui btn, show available actions btn
+
+		//AllResources.GainResource(resourceName, uiEventSystem.currentSelectedGameObject.name);
 	}
 
-	
+
+	public void PerformAction ()
+	{
+		Debug.Log("Current Action: " + uiEventSystem.currentSelectedGameObject.name);
+		//add the above current action to the currentlyCrafting list
+		Inventory.currentlyCrafting.Add(uiEventSystem.currentSelectedGameObject.name);
+		//hide the actions ui btn, show menu that has possible items
+	}	
 }
+
+
+
+
+
+
+
+
