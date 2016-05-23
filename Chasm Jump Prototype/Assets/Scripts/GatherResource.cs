@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 
 public class GatherResource : MonoBehaviour 
 {
+	public static GatherResource Instance;
 
+	private EventSystem uiEventSystem;
 	public static bool resourceInRange;
 	public static List<Item> possibleItems = new List<Item>();
 
+	public Canvas possibleItemsCanvas;
+	public RectTransform possibleItemsButtons;
+
 	void Start () 
 	{
-	
+		Instance = this;
+		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 	}
 	
 	void Update () 
@@ -19,40 +27,69 @@ public class GatherResource : MonoBehaviour
 	
 	}
 
-	public void DeterminePossileItems ()
+	public static void DeterminePossibleItems ()
 	{
 		//loop thru allItems list, if an item's requiremnts list is the same length and
 		//contains the same elements as the currentlyCrafting list
 		//add it to possibleItems list
+		List<Item> allItemsCopy = ItemMasterlist.GetAllItems();
+		foreach (Item item in allItemsCopy)
+		{
+			Debug.Log("currently crafting length: " + Inventory.currentlyCrafting.Count);
+			if (Inventory.currentlyCrafting.Count == item.requirements.Count)
+			{
+				bool noMatch = false;
+				foreach (string req in Inventory.currentlyCrafting)
+				{
+					Debug.Log("Current Craft: " + req + " present? " + item.requirements.Contains(req));
+					if (!item.requirements.Contains(req))
+					{
+						noMatch = true;
+					}
+				}
+
+				if (!noMatch)
+				{
+					possibleItems.Add(item);
+				}
+			}
+		}
+
+		ShowPossibleItems();
 	}
 
 
-	public void ShowPossibleItems ()
+	public static void ShowPossibleItems ()
 	{
+		Debug.Log(possibleItems.Count);
+		Instance.possibleItemsCanvas.enabled = true;
 
+		foreach(Item item in possibleItems)
+		{
+			Debug.Log("Possible Item: " + item.name);
+			GameObject possilbeItemBtn =  (GameObject)Instantiate(Resources.Load("Items/Buttons/Wood Logs"));
+			possilbeItemBtn.name = "Wood Logs";
+			possilbeItemBtn.transform.SetParent(Instance.possibleItemsButtons, false);
+			possilbeItemBtn.transform.localScale = new Vector2(1,1);
+
+			Button btnComponent = possilbeItemBtn.GetComponent<Button>();
+			btnComponent.onClick.AddListener(() => SelectShownItem());
+		}
+
+
+		
+		
 	}
 
-	public void SelectShownItem ()
+	public static void SelectShownItem ()
 	{
 		//based on the item name from the shown button, increment the item count in inventory
-		//Inventory.UpdateResourceCount(uiEventSystem.currentSelectedGameObject.name, 1);
+		string itemName = Instance.uiEventSystem.currentSelectedGameObject.name;
+		Inventory.UpdateResourceCount(itemName, 1);
+		Debug.Log("Received Item! Total "+ itemName + " :" + Inventory.GetResourceCount(itemName));
 
 		//after player takes item, clear currentlyCrafting list
+		Instance.possibleItemsCanvas.enabled = false;
 		Inventory.currentlyCrafting.Clear();
 	}
-
-
-	//on trigger enter, enable ability to show that object's interaction menu, and available tool options
-	//meaning, look at trigger, get base game object (a resource object) get the child Resource InteractCanvas, 
-	
-
-	/*public static void GainResource (string resourceName, string tool)
-	{
-		if (tool == "Hatchet")
-		{
-			Inventory.UpdateResourceCount(resourceName, 1);
-			Debug.Log("Wood Logs Count: " + Inventory.GetResourceCount(resourceName));
-		}	
-	}
-	*/
 }

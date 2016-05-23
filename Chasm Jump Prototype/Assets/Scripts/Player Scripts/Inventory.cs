@@ -22,17 +22,17 @@ public class Inventory
 
 	private static Dictionary<string, int> resources = new Dictionary<string, int>()
 	{
-		{"woodLogs", 0},
-		{"woodLashings", 0},
-		{"branches", 0},
-		{"sticks", 0},
-		{"matches", 0},
-		{"sap", 0},
-		{"water", 0},
-		{"deadBirds", 0},
-		{"deadDeer", 0},
-		{"feathers", 0},
-		{"pelts", 0}
+		{"Wood Logs", 0},
+		{"Wood Lashings", 0},
+		{"Branches", 0},
+		{"Sticks", 0},
+		{"Matches", 0},
+		{"Sap", 0},
+		{"Water", 0},
+		{"Dead Birds", 0},
+		{"Dead Deer", 0},
+		{"Feathers", 0},
+		{"Pelts", 0}
 	};
 
 	public static void UpdateResourceCount (string resourceName, int updateAmount)
