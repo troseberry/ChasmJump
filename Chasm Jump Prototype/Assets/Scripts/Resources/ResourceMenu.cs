@@ -8,6 +8,8 @@ public class ResourceMenu : MonoBehaviour
 
 	public GameObject toolOptions;
 	public GameObject hatchetActions;
+	public GameObject matchesActions;
+	public GameObject knifeActions;
 	public string resourceName;				//important to rename resources to exact name (instead of clone) on instantiation
 	
 	void Start () 
@@ -17,6 +19,8 @@ public class ResourceMenu : MonoBehaviour
 		resourceName = transform.parent.name;
 		toolOptions.SetActive(false);
 		hatchetActions.SetActive(false);
+		matchesActions.SetActive(false);
+		knifeActions.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -49,6 +53,9 @@ public class ResourceMenu : MonoBehaviour
 
 	public void UseTool ()
 	{
+		//clear old things in currentlyCrafting list
+		Inventory.currentlyCrafting.Clear();
+
 		//Debug.Log("Current Item Source: " + resourceName);
 		//add the above source to the currentlyCrafting list
 		Inventory.currentlyCrafting.Add(resourceName);
@@ -62,6 +69,16 @@ public class ResourceMenu : MonoBehaviour
 		{
 			ToggleToolOptions();
 			hatchetActions.SetActive(true);
+		}
+		else if (currentTool == "Matches")
+		{
+			ToggleToolOptions();
+			matchesActions.SetActive(true);
+		}
+		else if (currentTool == "Knife")
+		{
+			ToggleToolOptions();
+			knifeActions.SetActive(true);
 		}
 	}
 

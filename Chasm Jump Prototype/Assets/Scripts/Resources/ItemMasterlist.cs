@@ -11,20 +11,6 @@ using System.Collections.Generic;
 public class ItemMasterlist
 {
 
-	public static Item woodLogs = new Item () 
-	{
-		name = "Wood Logs", 
-		itemType = "rawResource", 
-		requirements = new List<string>(new string[] {"Tree", "Hatchet", "Cut"})
-	};
-
-	public static Item woodLashing = new Item ()
-	{
-		name = "Wood Lashing",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Tree", "Hatchet", "Shread"})
-	};
-
 	public static Item branch = new Item ()
 	{
 		name = "Branch",
@@ -32,32 +18,11 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Tree", "None", "Pull"})
 	};
 
-	public static Item sap = new Item ()
+	public static Item cotton = new Item ()
 	{
-		name = "Sap",
+		name = "Cotton",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Tree", "Spigot", "Tap"})
-	};
-
-	public static Item water = new Item ()
-	{
-		name = "Water",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"tree", "Spigot", "Tap"})
-	};
-
-	public static Item sticks = new Item ()
-	{
-		name = "Sticks",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Bush", "None", "Search"})
-	};
-
-	public static Item matches = new Item ()
-	{
-		name = "Matches",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Bush", "None", "Search"})
+		requirements = new List<string>(new string[] {"Cotton Plant", "None", "Search"})
 	};
 
 	public static Item deadBird = new Item ()
@@ -81,6 +46,13 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Dead Bird", "Bow + Arrow", "Skin"})
 	};
 
+	public static Item matches = new Item ()
+	{
+		name = "Matches",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"Bush", "None", "Search"})
+	};
+
 	public static Item pelt = new Item ()
 	{
 		name = "Pelt",
@@ -88,28 +60,57 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Dead Deer", "Bow + Arrow", "Skin"})
 	};
 
-	public static Item cotton = new Item ()
+	public static Item sap = new Item ()
 	{
-		name = "Cotton",
+		name = "Sap",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Cotton Plant", "None", "Search"})
+		requirements = new List<string>(new string[] {"Tree", "Spigot", "Tap"})
+	};
+
+	public static Item sticks = new Item ()
+	{
+		name = "Sticks",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"Bush", "None", "Search"})
+	};
+
+	public static Item water = new Item ()
+	{
+		name = "Water",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"tree", "Spigot", "Tap"})
+	};
+
+	public static Item woodLashings = new Item ()
+	{
+		name = "Wood Lashings",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
+	};
+
+	public static Item woodLogs = new Item () 
+	{
+		name = "Wood Logs", 
+		itemType = "rawResource", 
+		requirements = new List<string>(new string[] {"Tree", "Hatchet", "Chop"})
 	};
 
 
 	private static List<Item> allItems = new List<Item>()
 	{
-		woodLogs,
-		woodLashing,
+		
 		branch,
-		sticks,
-		matches,
-		sap,
-		water,
+		cotton,
 		deadBird,
 		deadDeer,
 		feathers,
+		matches,
 		pelt,
-		cotton
+		sap,
+		sticks,
+		water,
+		woodLashings,
+		woodLogs
 	};
 
 

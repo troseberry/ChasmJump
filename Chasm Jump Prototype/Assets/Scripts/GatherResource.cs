@@ -67,8 +67,8 @@ public class GatherResource : MonoBehaviour
 		foreach(Item item in possibleItems)
 		{
 			Debug.Log("Possible Item: " + item.name);
-			GameObject possilbeItemBtn =  (GameObject)Instantiate(Resources.Load("Items/Buttons/Wood Logs"));
-			possilbeItemBtn.name = "Wood Logs";
+			GameObject possilbeItemBtn =  (GameObject)Instantiate(Resources.Load("Items/Buttons/" + item.name));
+			possilbeItemBtn.name = item.name;
 			possilbeItemBtn.transform.SetParent(Instance.possibleItemsButtons, false);
 			possilbeItemBtn.transform.localScale = new Vector2(1,1);
 
