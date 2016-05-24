@@ -78,7 +78,7 @@ public class ItemMasterlist
 	{
 		name = "Water",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"tree", "Spigot", "Tap"})
+		requirements = new List<string>(new string[] {"Tree", "Spigot", "Tap"})
 	};
 
 	public static Item woodLashings = new Item ()
@@ -87,6 +87,20 @@ public class ItemMasterlist
 		itemType = "rawResource",
 		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
 	};
+
+	/*public static Item testItemOne = new Item ()
+	{
+		name = "Test Item One",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
+	};
+
+	public static Item testItemTwo = new Item ()
+	{
+		name = "Test Item Two",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
+	};*/
 
 	public static Item woodLogs = new Item () 
 	{
@@ -110,7 +124,9 @@ public class ItemMasterlist
 		sticks,
 		water,
 		woodLashings,
-		woodLogs
+		woodLogs/*,
+		testItemTwo,
+		testItemTwo*/
 	};
 
 
