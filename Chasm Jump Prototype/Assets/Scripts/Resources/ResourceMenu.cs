@@ -25,6 +25,18 @@ public class ResourceMenu : MonoBehaviour
 	
 	}
 
+	public void ToggleToolOptions(BaseEventData click)
+	{
+		PointerEventData pedClick = (PointerEventData)click;
+		Debug.Log("Mouse Click: " + pedClick.pointerId);
+
+		if (pedClick.pointerId == -2 && GatherResource.resourceInRange)
+		{
+			Debug.Log("Free Toggle Available Tool Options");
+			toolOptions.SetActive(!toolOptions.activeSelf);
+		}
+	}
+
 	public void ToggleToolOptions()
 	{
 		if (GatherResource.resourceInRange)
@@ -32,8 +44,8 @@ public class ResourceMenu : MonoBehaviour
 			Debug.Log("Toggle Available Tool Options");
 			toolOptions.SetActive(!toolOptions.activeSelf);
 		}
-
 	}
+
 
 	public void UseTool ()
 	{
@@ -56,15 +68,17 @@ public class ResourceMenu : MonoBehaviour
 
 	public void PerformAction ()
 	{
-		string currentAction = uiEventSystem.currentSelectedGameObject.name;
+		GameObject currentAction = uiEventSystem.currentSelectedGameObject;
 		//Debug.Log("Current Action: " + currentAction);
-		Inventory.currentlyCrafting.Add(currentAction);
+		Inventory.currentlyCrafting.Add(currentAction.name);
 		//hide the actions ui btn, show menu that has possible items
 
 		foreach (string req in Inventory.currentlyCrafting)
 		{
 			//Debug.Log("Crafting List: " + req);
 		}
+
+		currentAction.transform.parent.gameObject.SetActive(false);
 
 		GatherResource.DeterminePossibleItems();
 		Debug.Log("Determining Possible Items");
