@@ -50,7 +50,7 @@ public class ItemMasterlist
 	{
 		name = "Matches",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Bush", "None", "Search"})
+		requirements = new List<string>(new string[] {"Bush", "Magnifying Glass", "Search"})
 	};
 
 	public static Item pelt = new Item ()
@@ -71,7 +71,7 @@ public class ItemMasterlist
 	{
 		name = "Sticks",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Bush", "None", "Search"})
+		requirements = new List<string>(new string[] {"Bush", "Magnifying Glass", "Search"})
 	};
 
 	public static Item water = new Item ()

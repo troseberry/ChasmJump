@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class InPlayerRange : MonoBehaviour 
 {
-	public GameObject toolOptions;
-	public GameObject hatchetActions;
-	public GameObject matchesActions;
-	public GameObject knifeActions;
+	private ResourceMenu resourceMenu;
+
+	void Start ()
+	{
+		resourceMenu = GetComponentInChildren<ResourceMenu>();
+	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
@@ -25,21 +28,10 @@ public class InPlayerRange : MonoBehaviour
 			GatherResource.resourceInRange = false;
 			Inventory.currentlyCrafting.Clear();
 
-			if(toolOptions.activeSelf)
+			if (resourceMenu.interactCanvas.enabled)
 			{
-				toolOptions.SetActive(false);
-			}
-			else if (hatchetActions.activeSelf)
-			{
-				hatchetActions.SetActive(false);
-			}
-			else if (matchesActions.activeSelf)
-			{
-				matchesActions.SetActive(false);
-			}
-			else if (knifeActions.activeSelf)
-			{
-				knifeActions.SetActive(false);
+				resourceMenu.interactCanvas.enabled = false;
+				resourceMenu.ResetInteractCanvas();
 			}
 		}
 	}

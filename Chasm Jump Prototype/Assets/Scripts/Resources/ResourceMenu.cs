@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
@@ -6,10 +7,14 @@ public class ResourceMenu : MonoBehaviour
 {
 	private EventSystem uiEventSystem;
 
+	public Canvas interactCanvas;
+	public GameObject background;
 	public GameObject toolOptions;
 	public GameObject hatchetActions;
 	public GameObject matchesActions;
 	public GameObject knifeActions;
+	public GameObject magnifyingGlassActions;
+	public GameObject bowArrowActions;
 	public string resourceName;				//important to rename resources to exact name (instead of clone) on instantiation
 	
 	void Start () 
@@ -17,19 +22,45 @@ public class ResourceMenu : MonoBehaviour
 		//toolOptions = RectTransform.Find("Tools");
 		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 		resourceName = transform.parent.name;
-		toolOptions.SetActive(false);
+		
+		ResetInteractCanvas();
+	}
+	
+	public void ToggleInteractCanvas (BaseEventData click)
+	{
+		PointerEventData pedClick = (PointerEventData)click;
+		Debug.Log("Mouse Click: " + pedClick.pointerId);
+
+		if (pedClick.pointerId == -2 && GatherResource.resourceInRange)
+		{
+			Debug.Log("Toggle Interact Canvas");
+			interactCanvas.enabled = !interactCanvas.enabled;
+		}
+	}
+
+	public void ToggleInteractCanvas ()
+	{
+		if (GatherResource.resourceInRange)
+		{
+			Debug.Log("Toggle Interact Canvas, no click");
+			interactCanvas.enabled = !interactCanvas.enabled;
+		}
+	}
+
+	public void ResetInteractCanvas ()
+	{
+		Debug.Log("Reset");
+		toolOptions.SetActive(true);
 		hatchetActions.SetActive(false);
 		matchesActions.SetActive(false);
 		knifeActions.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
+		magnifyingGlassActions.SetActive(false);
+		bowArrowActions.SetActive(false);
+
+		//clear buttons from possible items
 	}
 
-	public void ToggleToolOptions(BaseEventData click)
+	/*public void ToggleToolOptions (BaseEventData click)
 	{
 		PointerEventData pedClick = (PointerEventData)click;
 		Debug.Log("Mouse Click: " + pedClick.pointerId);
@@ -39,7 +70,7 @@ public class ResourceMenu : MonoBehaviour
 			Debug.Log("Free Toggle Available Tool Options");
 			toolOptions.SetActive(!toolOptions.activeSelf);
 		}
-	}
+	}*/
 
 	public void ToggleToolOptions()
 	{
@@ -65,20 +96,27 @@ public class ResourceMenu : MonoBehaviour
 		Inventory.currentlyCrafting.Add(currentTool);
 		//hide tools ui btn, show available actions btn
 
+		ToggleToolOptions();
+
 		if (currentTool == "Hatchet")
 		{
-			ToggleToolOptions();
 			hatchetActions.SetActive(true);
 		}
 		else if (currentTool == "Matches")
 		{
-			ToggleToolOptions();
 			matchesActions.SetActive(true);
 		}
 		else if (currentTool == "Knife")
 		{
-			ToggleToolOptions();
 			knifeActions.SetActive(true);
+		}
+		else if (currentTool == "Magnifying Glass")
+		{
+			magnifyingGlassActions.SetActive(true);
+		}
+		else if (currentTool == "Bow + Arrow")
+		{
+			bowArrowActions.SetActive(true);
 		}
 	}
 
@@ -90,12 +128,15 @@ public class ResourceMenu : MonoBehaviour
 		Inventory.currentlyCrafting.Add(currentAction.name);
 		//hide the actions ui btn, show menu that has possible items
 
-		foreach (string req in Inventory.currentlyCrafting)
+		/*foreach (string req in Inventory.currentlyCrafting)
 		{
-			//Debug.Log("Crafting List: " + req);
-		}
+			Debug.Log("Crafting List: " + req);
+		}*/
 
 		currentAction.transform.parent.gameObject.SetActive(false);
+		
+		ResetInteractCanvas();
+		ToggleInteractCanvas();
 
 		GatherResource.DeterminePossibleItems();
 		Debug.Log("Determining Possible Items");
