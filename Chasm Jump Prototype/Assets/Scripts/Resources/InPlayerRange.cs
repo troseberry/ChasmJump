@@ -8,6 +8,7 @@ public class InPlayerRange : MonoBehaviour
 
 	void Start ()
 	{
+		Debug.Log("Resource Name: " + name);
 		resourceMenu = GetComponentInChildren<ResourceMenu>();
 	}
 

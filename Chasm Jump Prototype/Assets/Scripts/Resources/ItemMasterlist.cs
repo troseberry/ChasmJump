@@ -22,7 +22,7 @@ public class ItemMasterlist
 	{
 		name = "Cotton",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Cotton Plant", "None", "Search"})
+		requirements = new List<string>(new string[] {"Cotton Plant", "Magnifying Glass", "Search"})
 	};
 
 	public static Item deadBird = new Item ()
@@ -43,7 +43,7 @@ public class ItemMasterlist
 	{
 		name = "Feathers",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Dead Bird", "Bow + Arrow", "Skin"})
+		requirements = new List<string>(new string[] {"Dead Bird", "Knife", "Skin"})
 	};
 
 	public static Item matches = new Item ()
@@ -57,7 +57,7 @@ public class ItemMasterlist
 	{
 		name = "Pelt",
 		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Dead Deer", "Bow + Arrow", "Skin"})
+		requirements = new List<string>(new string[] {"Dead Deer", "Knife", "Skin"})
 	};
 
 	public static Item sap = new Item ()
