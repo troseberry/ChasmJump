@@ -12,6 +12,7 @@ public class GatherResource : MonoBehaviour
 	private EventSystem uiEventSystem;
 	public static bool resourceInRange;
 	public static List<Item> possibleItems = new List<Item>();
+	private static List<Item> allItemsCopy;
 
 	public Canvas possibleItemsCanvas;
 	public RectTransform possibleItemsButtons;
@@ -20,6 +21,7 @@ public class GatherResource : MonoBehaviour
 	{
 		Instance = this;
 		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+		allItemsCopy= ItemMasterlist.GetAllItems();
 	}
 	
 	void Update () 
@@ -32,7 +34,6 @@ public class GatherResource : MonoBehaviour
 		//loop thru allItems list, if an item's requiremnts list is the same length and
 		//contains the same elements as the currentlyCrafting list
 		//add it to possibleItems list
-		List<Item> allItemsCopy = ItemMasterlist.GetAllItems();
 		foreach (Item item in allItemsCopy)
 		{
 			Debug.Log("currently crafting length: " + Inventory.currentlyCrafting.Count);
@@ -74,11 +75,7 @@ public class GatherResource : MonoBehaviour
 
 			Button btnComponent = possilbeItemBtn.GetComponent<Button>();
 			btnComponent.onClick.AddListener(() => SelectShownItem());
-		}
-
-
-		
-		
+		}		
 	}
 
 	public static void SelectShownItem ()
@@ -90,6 +87,16 @@ public class GatherResource : MonoBehaviour
 
 		//after player takes item, clear currentlyCrafting list
 		Instance.possibleItemsCanvas.enabled = false;
+		ClearPossibleItems();
 		Inventory.currentlyCrafting.Clear();
+	}
+
+	public static void ClearPossibleItems ()
+	{
+		possibleItems.Clear();
+		foreach (Transform Child in Instance.possibleItemsButtons)
+		{
+			Destroy(Child.gameObject);
+		}
 	}
 }

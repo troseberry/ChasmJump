@@ -33,6 +33,12 @@ public class InPlayerRange : MonoBehaviour
 				resourceMenu.interactCanvas.enabled = false;
 				resourceMenu.ResetInteractCanvas();
 			}
+
+			if (GatherResource.Instance.possibleItemsCanvas.enabled)
+			{
+				GatherResource.Instance.possibleItemsCanvas.enabled = false;
+				GatherResource.ClearPossibleItems();
+			}
 		}
 	}
 }
