@@ -11,6 +11,13 @@ using System.Collections.Generic;
 public class ItemMasterlist
 {
 
+	public static Item bark = new Item ()
+	{
+		name = "Bark",
+		itemType = "rawResource",
+		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
+	};
+
 	public static Item branch = new Item ()
 	{
 		name = "Branch",
@@ -81,13 +88,6 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Tree", "Spigot", "Tap"})
 	};
 
-	public static Item woodLashings = new Item ()
-	{
-		name = "Wood Lashings",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
-	};
-
 	/*public static Item testItemOne = new Item ()
 	{
 		name = "Test Item One",
@@ -113,6 +113,7 @@ public class ItemMasterlist
 	private static List<Item> allItems = new List<Item>()
 	{
 		
+		bark,
 		branch,
 		cotton,
 		deadBird,
@@ -123,7 +124,6 @@ public class ItemMasterlist
 		sap,
 		sticks,
 		water,
-		woodLashings,
 		woodLogs/*,
 		testItemTwo,
 		testItemTwo*/
