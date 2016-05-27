@@ -24,6 +24,10 @@ public class CraftingMenu : MonoBehaviour
 
 	public List<string> currentlyCrafting;		//treating like a read only version of Inventory.currentlycrafting
 
+	private int currentPage = 0;
+	public GameObject[] pages = new GameObject[3];
+
+
 	void Start () 
 	{
 		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
@@ -90,19 +94,49 @@ public class CraftingMenu : MonoBehaviour
 				currentHover.GetComponentInChildren<RawImage>().enabled = true;
 				lastHovered = currentHover;
 			}
-			
-
-			
 		}
 	}
 
 	public void HoverOutlineOff ()
 	{
-
 		Debug.Log("Last Hovered: " + lastHovered.name);
 		if (!currentlyCrafting.Contains(lastHovered.name))
 		{
 			lastHovered.GetComponentInChildren<RawImage>().enabled = false;
 		}
+	}
+
+	public void SwitchPage ()
+	{
+		string currentArrow = uiEventSystem.currentSelectedGameObject.name;
+
+		if (currentArrow == "LeftArrow")
+		{
+			Debug.Log("Going left");
+			currentPage = (currentPage + 2) % pages.Length;
+		}
+		else
+		{
+			currentPage = (currentPage + 1) % pages.Length;
+		}
+
+		Debug.Log("Current Page #: " + currentPage);
+
+		for (int i = 0; i < pages.Length; i++)
+		{
+			if (i == currentPage)
+			{
+				pages[i].SetActive(true);
+			}
+			else
+			{
+				pages[i].SetActive(false);
+			}
+		}
+	}
+
+	public void CraftItem ()
+	{
+		GatherResource.DeterminePossibleItems();
 	}
 }

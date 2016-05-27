@@ -17,11 +17,15 @@ public class GatherResource : MonoBehaviour
 	public Canvas possibleItemsCanvas;
 	public RectTransform possibleItemsButtons;
 
+	private static Canvas craftingMenu;
+
 	void Start () 
 	{
 		Instance = this;
 		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 		allItemsCopy= ItemMasterlist.GetAllItems();
+
+		craftingMenu = GameObject.Find("CraftingMenu").GetComponent<Canvas>();
 	}
 	
 	void Update () 
@@ -55,8 +59,10 @@ public class GatherResource : MonoBehaviour
 				}
 			}
 		}
-
-		ShowPossibleItems();
+		if(!craftingMenu.enabled)
+		{
+			ShowPossibleItems();
+		}
 	}
 
 
