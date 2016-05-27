@@ -9,17 +9,100 @@
 
 
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
+using System.Collections.Generic;
 
-public class CraftingMenu : MonoBehaviour {
+public class CraftingMenu : MonoBehaviour 
+{
+	private EventSystem uiEventSystem;
+	private Canvas craftingMenu;
+	public Text selections;
 
-	// Use this for initialization
-	void Start () {
-	
+	private GameObject lastHovered;
+
+	public List<string> currentlyCrafting;		//treating like a read only version of Inventory.currentlycrafting
+
+	void Start () 
+	{
+		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+		craftingMenu = GetComponent<Canvas>(); 
+		craftingMenu.enabled = false;
+
+		Inventory.currentlyCrafting.Clear();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+	{
+		currentlyCrafting = Inventory.currentlyCrafting;
+
+		if (Input.GetKeyDown(KeyCode.C))
+		{
+			craftingMenu.enabled = !craftingMenu.enabled;
+		}
+	}
+
+	public void EditSelections ()
+	{
+		GameObject currentSelection = uiEventSystem.currentSelectedGameObject;
+
+
+		if (!currentlyCrafting.Contains(currentSelection.name))
+		{
+			if (currentlyCrafting.Count < 7)
+			{
+				Inventory.currentlyCrafting.Add(currentSelection.name);
+				currentSelection.GetComponentInChildren<RawImage>().enabled = true;
+			}
+		}
+		else
+		{
+			Inventory.currentlyCrafting.Remove(currentSelection.name);
+			currentSelection.GetComponentInChildren<RawImage>().enabled = false;
+		}
+
+		selections.text = "";
+		foreach (string item in currentlyCrafting)
+		{
+			selections.text += (item + "\n");
+		}
+	}
+
+	public void HoverOutlineOn (BaseEventData hover)
+	{
+		PointerEventData pedHover = (PointerEventData)hover;
+
+		if(pedHover.pointerEnter.tag == "CraftingButton")
+		{
+			GameObject currentHover = pedHover.pointerEnter;
+			Debug.Log("Current Hover: " + currentHover.name);
+
+			if (!currentHover.GetComponent<Button>())
+			{
+				currentHover = currentHover.transform.parent.gameObject;
+				Debug.Log("New Current Hover: " + currentHover);
+			}
+
+
+			if (!currentlyCrafting.Contains(currentHover.name))
+			{
+				currentHover.GetComponentInChildren<RawImage>().enabled = true;
+				lastHovered = currentHover;
+			}
+			
+
+			
+		}
+	}
+
+	public void HoverOutlineOff ()
+	{
+
+		Debug.Log("Last Hovered: " + lastHovered.name);
+		if (!currentlyCrafting.Contains(lastHovered.name))
+		{
+			lastHovered.GetComponentInChildren<RawImage>().enabled = false;
+		}
 	}
 }
