@@ -100,9 +100,12 @@ public class GatherResource : MonoBehaviour
 	public static void ClearPossibleItems ()
 	{
 		possibleItems.Clear();
-		foreach (Transform Child in Instance.possibleItemsButtons)
+		if (!craftingMenu.enabled)
 		{
-			Destroy(Child.gameObject);
+			foreach (Transform Child in Instance.possibleItemsButtons)
+			{
+				Destroy(Child.gameObject);
+			}
 		}
 	}
 }

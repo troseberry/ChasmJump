@@ -16,6 +16,8 @@ using System.Collections.Generic;
 
 public class CraftingMenu : MonoBehaviour 
 {
+	public static CraftingMenu Instance;
+
 	private EventSystem uiEventSystem;
 	private Canvas craftingMenu;
 	public Text selections;
@@ -27,9 +29,13 @@ public class CraftingMenu : MonoBehaviour
 	private int currentPage = 0;
 	public GameObject[] pages = new GameObject[3];
 
+	public RectTransform currentResult;
+
 
 	void Start () 
 	{
+		Instance = this;
+
 		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 		craftingMenu = GetComponent<Canvas>(); 
 		craftingMenu.enabled = false;
@@ -71,7 +77,64 @@ public class CraftingMenu : MonoBehaviour
 		{
 			selections.text += (item + "\n");
 		}
+
+
+
+		//change the currentResult
+		ClearResults();
+
+		GatherResource.DeterminePossibleItems();
+		ShowResult();
+		/*foreach (string item in GatherResource.possibleItems)
+		{
+			//compare to the buttons that are already being displayed.
+			//if not already present, create the button
+		}*/
 	}
+
+	public static void ShowResult ()
+	{
+		foreach (Item item in GatherResource.possibleItems)
+		{
+			//compare to the buttons that are already being displayed.
+			//if not already present, create the button
+			Debug.Log("Result Item: " + item.name);
+			GameObject resultButton =  (GameObject)Instantiate(Resources.Load("Items/Buttons/" + item.name));
+			resultButton.name = item.name;
+			resultButton.transform.SetParent(Instance.currentResult, false);
+			resultButton.transform.localScale = new Vector2(3,3);
+
+			Debug.Log("Adding Button Function");
+			Button btnComponent = resultButton.GetComponent<Button>();
+			btnComponent.onClick.AddListener(() => SelectResultItem());
+			Debug.Log("Button Function Added");
+		}		
+	}
+
+	public static void SelectResultItem ()
+	{
+		//based on the item name from the shown button, increment the item count in inventory
+		string itemName = Instance.uiEventSystem.currentSelectedGameObject.name;
+		Inventory.UpdateResourceCount(itemName, 1);
+		Debug.Log("Received Item! Total "+ itemName + " :" + Inventory.GetResourceCount(itemName));
+
+		//after player takes item, clear currentlyCrafting list
+		ClearResults();
+		Inventory.currentlyCrafting.Clear();
+	}
+
+	public static void ClearResults ()
+	{
+		GatherResource.possibleItems.Clear();
+		foreach (Transform Child in Instance.currentResult)
+		{
+			Destroy(Child.gameObject);
+		}
+	}
+
+
+
+
 
 	public void HoverOutlineOn (BaseEventData hover)
 	{
