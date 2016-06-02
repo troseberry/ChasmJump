@@ -17,7 +17,7 @@ public class InPlayerRange : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			Debug.Log("Resource in Range");
-			GatherResource.resourceInRange = true;
+			Crafting.resourceInRange = true;
 		}
 	}
 
@@ -26,7 +26,7 @@ public class InPlayerRange : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			Debug.Log("Resource Out Range");
-			GatherResource.resourceInRange = false;
+			Crafting.resourceInRange = false;
 			Inventory.currentlyCrafting.Clear();
 
 			if (resourceMenu.interactCanvas.enabled)
@@ -35,10 +35,10 @@ public class InPlayerRange : MonoBehaviour
 				resourceMenu.ResetInteractCanvas();
 			}
 
-			if (GatherResource.Instance.possibleItemsCanvas.enabled)
+			if (PossibleItemsMenu.possibleItemsCanvas.enabled)
 			{
-				GatherResource.Instance.possibleItemsCanvas.enabled = false;
-				GatherResource.ClearPossibleItems();
+				PossibleItemsMenu.possibleItemsCanvas.enabled = false;
+				PossibleItemsMenu.ClearItems();
 			}
 		}
 	}

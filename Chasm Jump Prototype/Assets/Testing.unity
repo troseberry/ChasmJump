@@ -463,7 +463,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 27286968}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1575,7 +1575,6 @@ GameObject:
   - 61: {fileID: 275405225}
   - 58: {fileID: 275405226}
   - 114: {fileID: 275405223}
-  - 114: {fileID: 275405227}
   m_Layer: 0
   m_Name: Adventurer
   m_TagString: Player
@@ -1709,19 +1708,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.36}
   serializedVersion: 2
   m_Radius: 0.26
---- !u!114 &275405227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 275405219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ad5ff5fbcbde41b287f4ea02093724c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleItemsCanvas: {fileID: 346178566}
-  possibleItemsButtons: {fileID: 977670042}
 --- !u!1 &280927627
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,6 +2354,7 @@ GameObject:
   - 223: {fileID: 346178566}
   - 114: {fileID: 346178565}
   - 114: {fileID: 346178564}
+  - 114: {fileID: 346178568}
   m_Layer: 5
   m_Name: PossibleItemsCanvas
   m_TagString: Untagged
@@ -2450,6 +2437,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &346178568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 346178563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e857868e65e340ac9d2a9cfafc7cfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &355021315
 GameObject:
   m_ObjectHideFlags: 0

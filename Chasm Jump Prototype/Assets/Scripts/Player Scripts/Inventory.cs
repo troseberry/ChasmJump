@@ -19,6 +19,7 @@ public class Inventory
 	*/
 
 	public static List<string> currentlyCrafting = new List<string>(); //add and clear in other scripts
+	
 
 	private static Dictionary<string, int> resources = new Dictionary<string, int>()
 	{

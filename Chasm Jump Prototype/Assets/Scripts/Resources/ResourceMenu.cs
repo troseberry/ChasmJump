@@ -31,7 +31,7 @@ public class ResourceMenu : MonoBehaviour
 		PointerEventData pedClick = (PointerEventData)click;
 		Debug.Log("Mouse Click: " + pedClick.pointerId);
 
-		if (pedClick.pointerId == -2 && GatherResource.resourceInRange)
+		if (pedClick.pointerId == -2 && Crafting.resourceInRange)
 		{
 			Debug.Log("Toggle Interact Canvas");
 			interactCanvas.enabled = !interactCanvas.enabled;
@@ -40,7 +40,7 @@ public class ResourceMenu : MonoBehaviour
 
 	public void ToggleInteractCanvas ()
 	{
-		if (GatherResource.resourceInRange)
+		if (Crafting.resourceInRange)
 		{
 			Debug.Log("Toggle Interact Canvas, no click");
 			interactCanvas.enabled = !interactCanvas.enabled;
@@ -74,7 +74,7 @@ public class ResourceMenu : MonoBehaviour
 
 	public void ToggleToolOptions()
 	{
-		if (GatherResource.resourceInRange)
+		if (Crafting.resourceInRange)
 		{
 			Debug.Log("Toggle Available Tool Options");
 			toolOptions.SetActive(!toolOptions.activeSelf);
@@ -138,7 +138,7 @@ public class ResourceMenu : MonoBehaviour
 		ResetInteractCanvas();
 		ToggleInteractCanvas();
 
-		GatherResource.DeterminePossibleItems();
+		Crafting.DeterminePossibleItems(false);
 		Debug.Log("Determining Possible Items");
 	}	
 }

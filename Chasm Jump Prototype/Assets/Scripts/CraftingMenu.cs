@@ -18,7 +18,7 @@ public class CraftingMenu : MonoBehaviour
 {
 	public static CraftingMenu Instance;
 
-	private EventSystem uiEventSystem;
+	//private EventSystem uiEventSystem;
 	private Canvas craftingMenu;
 	public Text selections;
 
@@ -36,7 +36,7 @@ public class CraftingMenu : MonoBehaviour
 	{
 		Instance = this;
 
-		uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+		//uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 		craftingMenu = GetComponent<Canvas>(); 
 		craftingMenu.enabled = false;
 
@@ -55,7 +55,7 @@ public class CraftingMenu : MonoBehaviour
 
 	public void EditSelections ()
 	{
-		GameObject currentSelection = uiEventSystem.currentSelectedGameObject;
+		GameObject currentSelection = Crafting.uiEventSystem.currentSelectedGameObject;
 
 
 		if (!currentlyCrafting.Contains(currentSelection.name))
@@ -83,18 +83,13 @@ public class CraftingMenu : MonoBehaviour
 		//change the currentResult
 		ClearResults();
 
-		GatherResource.DeterminePossibleItems();
+		Crafting.DeterminePossibleItems(true);
 		ShowResult();
-		/*foreach (string item in GatherResource.possibleItems)
-		{
-			//compare to the buttons that are already being displayed.
-			//if not already present, create the button
-		}*/
 	}
 
 	public static void ShowResult ()
 	{
-		foreach (Item item in GatherResource.possibleItems)
+		foreach (Item item in Crafting.possibleItems)
 		{
 			//compare to the buttons that are already being displayed.
 			//if not already present, create the button
@@ -114,7 +109,7 @@ public class CraftingMenu : MonoBehaviour
 	public static void SelectResultItem ()
 	{
 		//based on the item name from the shown button, increment the item count in inventory
-		string itemName = Instance.uiEventSystem.currentSelectedGameObject.name;
+		string itemName = Crafting.uiEventSystem.currentSelectedGameObject.name;
 		Inventory.UpdateResourceCount(itemName, 1);
 		Debug.Log("Received Item! Total "+ itemName + " :" + Inventory.GetResourceCount(itemName));
 
@@ -125,7 +120,7 @@ public class CraftingMenu : MonoBehaviour
 
 	public static void ClearResults ()
 	{
-		GatherResource.possibleItems.Clear();
+		Crafting.possibleItems.Clear();
 		foreach (Transform Child in Instance.currentResult)
 		{
 			Destroy(Child.gameObject);
@@ -143,12 +138,12 @@ public class CraftingMenu : MonoBehaviour
 		if(pedHover.pointerEnter.tag == "CraftingButton")
 		{
 			GameObject currentHover = pedHover.pointerEnter;
-			Debug.Log("Current Hover: " + currentHover.name);
+			//Debug.Log("Current Hover: " + currentHover.name);
 
 			if (!currentHover.GetComponent<Button>())
 			{
 				currentHover = currentHover.transform.parent.gameObject;
-				Debug.Log("New Current Hover: " + currentHover);
+				//Debug.Log("New Current Hover: " + currentHover);
 			}
 
 
@@ -162,7 +157,7 @@ public class CraftingMenu : MonoBehaviour
 
 	public void HoverOutlineOff ()
 	{
-		Debug.Log("Last Hovered: " + lastHovered.name);
+		//Debug.Log("Last Hovered: " + lastHovered.name);
 		if (!currentlyCrafting.Contains(lastHovered.name))
 		{
 			lastHovered.GetComponentInChildren<RawImage>().enabled = false;
@@ -171,11 +166,11 @@ public class CraftingMenu : MonoBehaviour
 
 	public void SwitchPage ()
 	{
-		string currentArrow = uiEventSystem.currentSelectedGameObject.name;
+		string currentArrow = Crafting.uiEventSystem.currentSelectedGameObject.name;
 
 		if (currentArrow == "LeftArrow")
 		{
-			Debug.Log("Going left");
+			//Debug.Log("Going left");
 			currentPage = (currentPage + 2) % pages.Length;
 		}
 		else
@@ -183,7 +178,7 @@ public class CraftingMenu : MonoBehaviour
 			currentPage = (currentPage + 1) % pages.Length;
 		}
 
-		Debug.Log("Current Page #: " + currentPage);
+		//Debug.Log("Current Page #: " + currentPage);
 
 		for (int i = 0; i < pages.Length; i++)
 		{
@@ -196,10 +191,5 @@ public class CraftingMenu : MonoBehaviour
 				pages[i].SetActive(false);
 			}
 		}
-	}
-
-	public void CraftItem ()
-	{
-		GatherResource.DeterminePossibleItems();
 	}
 }
