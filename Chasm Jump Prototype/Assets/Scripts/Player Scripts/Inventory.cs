@@ -23,22 +23,41 @@ public class Inventory
 
 	private static Dictionary<string, int> resources = new Dictionary<string, int>()
 	{
-		{"Wood Logs", 0},
-		{"Wood Lashings", 0},
-		{"Branches", 0},
-		{"Sticks", 0},
+		//Tools
+		{"Bow + Arrow", 1},
+		{"Hatchet", 1},
+		{"Knife", 1},
+		{"Magnifying Glass", 1},
+
 		{"Matches", 0},
-		{"Sap", 0},
-		{"Water", 0},
-		{"Dead Birds", 0},
+
+		//Raw Resources
+		{"Bark", 0},
+		{"Branch", 0},
+		{"Cotton", 0},
+		{"Dead Bird", 0},
 		{"Dead Deer", 0},
+		{"Sap", 0},
+		{"Sticks", 0},
+		{"Water", 0},
+		{"Wood Logs", 0},
+
+		//Crafting Items
+		{"Cordage", 0},
 		{"Feathers", 0},
-		{"Pelts", 0}
+		{"Pelt", 0},
+		{"Shaved Branch", 0},
+		{"Thread", 0},
+		{"Wood Planks", 0},
+
+		//Components
+		{"Rope", 0}
 	};
 
 	public static void UpdateResourceCount (string resourceName, int updateAmount)
 	{
-		resources[resourceName] += updateAmount;
+		Item toUpdate = ItemMasterlist.GetItem(resourceName);
+		if(toUpdate.itemType != "tool") resources[resourceName] += updateAmount;
 	}
 
 	public static int GetResourceCount (string resourceName)

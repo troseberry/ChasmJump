@@ -25,6 +25,13 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Tree", "None", "Pull"})
 	};
 
+	public static Item cordage = new Item ()
+	{
+		name = "Cordage",
+		itemType = "craftingItem",
+		requirements = new List<string>(new string[] {"Bark"})
+	};
+
 	public static Item cotton = new Item ()
 	{
 		name = "Cotton",
@@ -49,7 +56,7 @@ public class ItemMasterlist
 	public static Item feathers = new Item ()
 	{
 		name = "Feathers",
-		itemType = "rawResource",
+		itemType = "craftingItem",
 		requirements = new List<string>(new string[] {"Dead Bird", "Knife"})
 	};
 
@@ -63,8 +70,15 @@ public class ItemMasterlist
 	public static Item pelt = new Item ()
 	{
 		name = "Pelt",
-		itemType = "rawResource",
+		itemType = "craftingItem",
 		requirements = new List<string>(new string[] {"Dead Deer", "Knife"})
+	};
+
+	public static Item rope = new Item ()
+	{
+		name = "Rope",
+		itemType = "component",
+		requirements = new List<string>(new string[] {"Cordage"})
 	};
 
 	public static Item sap = new Item ()
@@ -74,11 +88,25 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Tree", "Spigot", "Tap"})
 	};
 
+	public static Item shavedBranch = new Item ()
+	{
+		name = "Shaved Branch",
+		itemType = "craftingItem",
+		requirements = new List<string>(new string[] {"Branch", "Knife"})
+	};
+
 	public static Item sticks = new Item ()
 	{
 		name = "Sticks",
 		itemType = "rawResource",
 		requirements = new List<string>(new string[] {"Bush", "Magnifying Glass", "Search"})
+	};
+
+	public static Item thread = new Item ()
+	{
+		name = "Thread",
+		itemType = "craftingItem",
+		requirements = new List<string>(new string[] {"Cotton"})
 	};
 
 	public static Item water = new Item ()
@@ -88,25 +116,48 @@ public class ItemMasterlist
 		requirements = new List<string>(new string[] {"Tree", "Spigot", "Tap"})
 	};
 
-	/*public static Item testItemOne = new Item ()
-	{
-		name = "Test Item One",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
-	};
-
-	public static Item testItemTwo = new Item ()
-	{
-		name = "Test Item Two",
-		itemType = "rawResource",
-		requirements = new List<string>(new string[] {"Tree", "Knife", "Shread"})
-	};*/
-
 	public static Item woodLogs = new Item () 
 	{
 		name = "Wood Logs", 
 		itemType = "rawResource", 
 		requirements = new List<string>(new string[] {"Tree", "Hatchet", "Chop"})
+	};
+
+	public static Item woodPlanks = new Item ()
+	{
+		name = "Wood Planks",
+		itemType = "craftingItem",
+		requirements = new List<string>(new string[] {"Wood Logs", "Hatchet"})
+	};
+
+
+	//TOOLS
+	public static Item bowArrow = new Item ()
+	{
+		name = "Bow + Arrow",
+		itemType = "tool",
+		requirements = new List<string>(new string[] {})
+	};
+
+	public static Item hatchet = new Item ()
+	{
+		name = "Hatchet",
+		itemType = "tool",
+		requirements = new List<string>(new string[] {})
+	};
+
+	public static Item knife = new Item ()
+	{
+		name = "Knife",
+		itemType = "tool",
+		requirements = new List<string>(new string[] {})
+	};
+
+	public static Item magnifyingGlass = new Item ()
+	{
+		name = "Magnifying Glass",
+		itemType = "tool",
+		requirements = new List<string>(new string[] {})
 	};
 
 
@@ -115,18 +166,27 @@ public class ItemMasterlist
 		
 		bark,
 		branch,
+		cordage,
 		cotton,
 		deadBird,
 		deadDeer,
 		feathers,
 		matches,
 		pelt,
+		rope,
 		sap,
+		shavedBranch,
 		sticks,
+		thread,
 		water,
-		woodLogs/*,
-		testItemTwo,
-		testItemTwo*/
+		woodLogs,
+		woodPlanks,
+
+		//Tools
+		bowArrow,
+		hatchet,
+		knife,
+		magnifyingGlass
 	};
 
 
@@ -135,4 +195,8 @@ public class ItemMasterlist
 		return allItems;
 	}
 
+	public static Item GetItem (string itemName)
+	{
+		return allItems.Find(item => item.name == itemName);
+	}
 }

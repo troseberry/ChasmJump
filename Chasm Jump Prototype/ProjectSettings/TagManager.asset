@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Resource
   - CraftingButton
+  - ButtonOutline
   layers:
   - Default
   - TransparentFX

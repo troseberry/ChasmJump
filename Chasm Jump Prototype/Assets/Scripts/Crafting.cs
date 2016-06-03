@@ -36,10 +36,12 @@ public class Crafting
 
 				if (!noMatch)
 				{
-					Crafting.possibleItems.Add(item);
+					if(!Crafting.possibleItems.Contains(item)) Crafting.possibleItems.Add(item);
 				}
 			}
 		}
+
+		Debug.Log("Current Possible Items: " + possibleItems.Count);
 
 		if(!craftingMenuOpen)
 		{
@@ -47,7 +49,7 @@ public class Crafting
 		}
 		else
 		{
-			CraftingMenu.ShowResult();
+			CraftingMenu.ShowResults();
 		}
-	}	
+	}
 }

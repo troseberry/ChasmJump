@@ -7,24 +7,16 @@ public class PossibleItemsMenu : MonoBehaviour
 {
 	public static PossibleItemsMenu Instance;
 
-	//private EventSystem uiEventSystem;
-
 	public static Canvas possibleItemsCanvas;
 	private static RectTransform possibleItemsButtons;
+
 
 	void Start () 
 	{
 		Instance = this;
-
-		//uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-
+	
 		possibleItemsCanvas = GetComponent<Canvas>();
 		possibleItemsButtons = (RectTransform)transform.Find("Buttons");
-	}
-	
-	void Update () 
-	{
-	
 	}
 
 	public static void ShowItems ()

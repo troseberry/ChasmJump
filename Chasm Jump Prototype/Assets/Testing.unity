@@ -264,12 +264,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 542915015}
   - {fileID: 297147475}
-  - {fileID: 1707608465}
   - {fileID: 1747289183}
   - {fileID: 1462527775}
   - {fileID: 1431647834}
+  - {fileID: 1707608465}
+  - {fileID: 542915015}
   - {fileID: 2049037674}
   - {fileID: 971792018}
   - {fileID: 1165443084}
@@ -318,7 +318,7 @@ GameObject:
   - 114: {fileID: 27248748}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -658,7 +658,7 @@ GameObject:
   - 114: {fileID: 98326242}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1123,7 +1123,7 @@ GameObject:
   - 114: {fileID: 124886616}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1868,7 +1868,7 @@ RectTransform:
   - {fileID: 1874858497}
   - {fileID: 124886615}
   m_Father: {fileID: 20200336}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -107, y: 214.5}
@@ -2110,7 +2110,7 @@ GameObject:
   - 114: {fileID: 303630875}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2212,7 +2212,7 @@ GameObject:
   - 114: {fileID: 309263235}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2564,7 +2564,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000016292068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_Children: []
   m_Father: {fileID: 27286969}
   m_RootOrder: 4
@@ -3526,7 +3526,7 @@ GameObject:
   - 114: {fileID: 513020838}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3667,7 +3667,7 @@ GameObject:
   - 114: {fileID: 527096221}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3791,7 +3791,7 @@ RectTransform:
   - {fileID: 1245640342}
   - {fileID: 2062000469}
   m_Father: {fileID: 20200336}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -322, y: 214.5}
@@ -4503,7 +4503,7 @@ GameObject:
   - 114: {fileID: 702943057}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5411,7 +5411,7 @@ GameObject:
   - 114: {fileID: 816717905}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6353,7 +6353,7 @@ GameObject:
   - 114: {fileID: 864991763}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6420,7 +6420,7 @@ GameObject:
   - 114: {fileID: 872257873}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6550,7 +6550,7 @@ GameObject:
   - 114: {fileID: 909555000}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6970,7 +6970,7 @@ GameObject:
   - 114: {fileID: 980077221}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7301,7 +7301,7 @@ GameObject:
   - 114: {fileID: 1002451962}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7435,7 +7435,7 @@ GameObject:
   - 114: {fileID: 1020258418}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7589,7 +7589,7 @@ GameObject:
   - 114: {fileID: 1062430123}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7806,7 +7806,7 @@ GameObject:
   - 114: {fileID: 1119078864}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7873,7 +7873,7 @@ GameObject:
   - 114: {fileID: 1132565955}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7940,7 +7940,7 @@ GameObject:
   - 114: {fileID: 1139144639}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9031,7 +9031,7 @@ GameObject:
   - 114: {fileID: 1276858279}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9288,7 +9288,7 @@ GameObject:
   - 114: {fileID: 1303395239}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10018,7 +10018,7 @@ RectTransform:
   - {fileID: 1340305376}
   - {fileID: 1658249090}
   m_Father: {fileID: 20200336}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -107, y: -0.5}
@@ -10376,7 +10376,7 @@ GameObject:
   - 114: {fileID: 1455972772}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10655,7 +10655,7 @@ RectTransform:
   - {fileID: 1385312352}
   - {fileID: 1776184996}
   m_Father: {fileID: 20200336}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -322, y: -0.5}
@@ -10890,7 +10890,7 @@ GameObject:
   - 114: {fileID: 1469272245}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11413,7 +11413,7 @@ GameObject:
   - 114: {fileID: 1537945321}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11480,7 +11480,7 @@ GameObject:
   - 114: {fileID: 1569889340}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11614,7 +11614,7 @@ GameObject:
   - 114: {fileID: 1588207154}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11681,7 +11681,7 @@ GameObject:
   - 114: {fileID: 1594706545}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11794,7 +11794,7 @@ GameObject:
   - 114: {fileID: 1595763145}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11935,7 +11935,7 @@ GameObject:
   - 114: {fileID: 1598670034}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12337,7 +12337,7 @@ GameObject:
   - 114: {fileID: 1632538311}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12404,7 +12404,7 @@ GameObject:
   - 114: {fileID: 1646495462}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12471,7 +12471,7 @@ GameObject:
   - 114: {fileID: 1647263939}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12538,7 +12538,7 @@ GameObject:
   - 114: {fileID: 1647652303}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12605,7 +12605,7 @@ GameObject:
   - 114: {fileID: 1649196858}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12672,7 +12672,7 @@ GameObject:
   - 114: {fileID: 1658249091}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12835,7 +12835,7 @@ RectTransform:
   - {fileID: 670562401}
   - {fileID: 1062430122}
   m_Father: {fileID: 20200336}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 108, y: 214.5}
@@ -13099,7 +13099,7 @@ RectTransform:
   - {fileID: 1684797477}
   - {fileID: 1020258417}
   m_Father: {fileID: 20200336}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 323, y: 214.5}
@@ -13714,7 +13714,7 @@ GameObject:
   - 114: {fileID: 1776184997}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13932,7 +13932,7 @@ GameObject:
   - 114: {fileID: 1837394731}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14189,7 +14189,7 @@ GameObject:
   - 114: {fileID: 1867070865}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14897,7 +14897,7 @@ GameObject:
   - 114: {fileID: 1945158481}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16134,7 +16134,7 @@ GameObject:
   - 114: {fileID: 2062000470}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16469,7 +16469,7 @@ GameObject:
   - 114: {fileID: 2111324258}
   m_Layer: 5
   m_Name: Outline
-  m_TagString: Untagged
+  m_TagString: ButtonOutline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

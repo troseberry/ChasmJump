@@ -18,9 +18,10 @@ public class CraftingMenu : MonoBehaviour
 {
 	public static CraftingMenu Instance;
 
-	//private EventSystem uiEventSystem;
 	private Canvas craftingMenu;
 	public Text selections;
+
+	private static GameObject[] outlines;
 
 	private GameObject lastHovered;
 
@@ -36,11 +37,12 @@ public class CraftingMenu : MonoBehaviour
 	{
 		Instance = this;
 
-		//uiEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 		craftingMenu = GetComponent<Canvas>(); 
 		craftingMenu.enabled = false;
 
 		Inventory.currentlyCrafting.Clear();
+
+		outlines = GameObject.FindGameObjectsWithTag("ButtonOutline");		
 	}
 	
 	void Update () 
@@ -50,6 +52,10 @@ public class CraftingMenu : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.C))
 		{
 			craftingMenu.enabled = !craftingMenu.enabled;
+			ClearResults();
+			ClearOutlines();
+			Instance.selections.text = "";
+			Inventory.currentlyCrafting.Clear();
 		}
 	}
 
@@ -57,52 +63,58 @@ public class CraftingMenu : MonoBehaviour
 	{
 		GameObject currentSelection = Crafting.uiEventSystem.currentSelectedGameObject;
 
-
-		if (!currentlyCrafting.Contains(currentSelection.name))
+		if (Inventory.GetResourceCount(currentSelection.name) > 0)
 		{
-			if (currentlyCrafting.Count < 7)
+			if (!currentlyCrafting.Contains(currentSelection.name))
 			{
-				Inventory.currentlyCrafting.Add(currentSelection.name);
-				currentSelection.GetComponentInChildren<RawImage>().enabled = true;
+				if (currentlyCrafting.Count < 7)
+				{
+					Inventory.currentlyCrafting.Add(currentSelection.name);
+					currentSelection.GetComponentInChildren<RawImage>().enabled = true;
+				}
 			}
+			else
+			{
+				Inventory.currentlyCrafting.Remove(currentSelection.name);
+				currentSelection.GetComponentInChildren<RawImage>().enabled = false;
+			}
+
+			selections.text = "";
+			foreach (string item in currentlyCrafting)
+			{
+				selections.text += (item + "\n");
+			}
+
+
+
+			//change the currentResult
+			ClearResults();
+			Crafting.DeterminePossibleItems(true);
 		}
 		else
 		{
-			Inventory.currentlyCrafting.Remove(currentSelection.name);
-			currentSelection.GetComponentInChildren<RawImage>().enabled = false;
+			Debug.Log("NOT ENOUGH " + currentSelection.name);
 		}
-
-		selections.text = "";
-		foreach (string item in currentlyCrafting)
-		{
-			selections.text += (item + "\n");
-		}
-
-
-
-		//change the currentResult
-		ClearResults();
-
-		Crafting.DeterminePossibleItems(true);
-		ShowResult();
 	}
 
-	public static void ShowResult ()
+	public static void ShowResults ()
 	{
 		foreach (Item item in Crafting.possibleItems)
 		{
 			//compare to the buttons that are already being displayed.
 			//if not already present, create the button
-			Debug.Log("Result Item: " + item.name);
+
+			//Debug.Log("Result Item: " + item.name);
 			GameObject resultButton =  (GameObject)Instantiate(Resources.Load("Items/Buttons/" + item.name));
+			
 			resultButton.name = item.name;
 			resultButton.transform.SetParent(Instance.currentResult, false);
 			resultButton.transform.localScale = new Vector2(3,3);
 
-			Debug.Log("Adding Button Function");
+			//Debug.Log("Adding Button Function");
 			Button btnComponent = resultButton.GetComponent<Button>();
 			btnComponent.onClick.AddListener(() => SelectResultItem());
-			Debug.Log("Button Function Added");
+			//Debug.Log("Button Function Added");
 		}		
 	}
 
@@ -113,8 +125,18 @@ public class CraftingMenu : MonoBehaviour
 		Inventory.UpdateResourceCount(itemName, 1);
 		Debug.Log("Received Item! Total "+ itemName + " :" + Inventory.GetResourceCount(itemName));
 
+		//for each string in item.requirements, decrement inventory item by 1
+		Item selected = ItemMasterlist.GetItem(itemName);
+		foreach (string req in selected.requirements)
+		{
+			Debug.Log("Requirement: " + req);
+			Inventory.UpdateResourceCount(req, -1);
+		}
+
 		//after player takes item, clear currentlyCrafting list
 		ClearResults();
+		ClearOutlines();
+		Instance.selections.text = "";
 		Inventory.currentlyCrafting.Clear();
 	}
 
@@ -126,8 +148,6 @@ public class CraftingMenu : MonoBehaviour
 			Destroy(Child.gameObject);
 		}
 	}
-
-
 
 
 
@@ -155,12 +175,22 @@ public class CraftingMenu : MonoBehaviour
 		}
 	}
 
+	//To-Do: when the menu is closed, turn off all outlines that were on
 	public void HoverOutlineOff ()
 	{
 		//Debug.Log("Last Hovered: " + lastHovered.name);
 		if (!currentlyCrafting.Contains(lastHovered.name))
 		{
 			lastHovered.GetComponentInChildren<RawImage>().enabled = false;
+		}
+	}
+
+	public static void ClearOutlines ()
+	{
+		outlines = GameObject.FindGameObjectsWithTag("ButtonOutline");
+		foreach (GameObject outline in outlines)
+		{
+			outline.GetComponent<RawImage>().enabled = false;
 		}
 	}
 
